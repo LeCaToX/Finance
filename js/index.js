@@ -70,6 +70,10 @@ function draw() {
     showAxes(ctx,axes);
     fnGraph(ctx,axes,fn_invest,"rgb(102, 0, 255)",2); 
     fnGraph(ctx,axes,fn_total,"rgb(11,153,11)",2); 
+    
+    document.getElementById("to_mon").innerHTML = "$" + Math.floor(val_total[year]); 
+    document.getElementById("to_inv").innerHTML = "$" + Math.floor(fn_invest(year));
+    document.getElementById("profit").innerHTML = "$" + Math.floor(val_total[year] - fn_invest(year));
 }
 
 function showAxes(ctx,axes) {
@@ -141,3 +145,5 @@ function fnGraph (ctx,axes,func,color,thick) {
 function hello() {
     alert("Hello")
 }
+
+// -------------------------- STOCK ---------------------------
