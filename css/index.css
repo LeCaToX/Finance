@@ -1,0 +1,8 @@
+.input-form {
+    border: solid;
+    border-color: darkslateblue;
+    margin: 5vh;
+    padding: 3vh;
+    width: 30vh;
+    border-radius: 10px;
+}
