@@ -28,6 +28,21 @@ function showAxes(ctx,axes) {
     ctx.moveTo(xmin,h); ctx.lineTo(w,h);  // X axis
     ctx.moveTo(0,h);    ctx.lineTo(0,0);  // Y axis
     
+    
+    // Draw grid
+    ctx.font = "30px Arial";
+    ctx.fillText("Hello World", 10, 50); 
+    
+    // Vertical lines
+    for (var i=axes.scale; i<=w; i+=axes.scale) {
+        ctx.moveTo(i,h); ctx.lineTo(i,0); 
+    }
+    
+    // Horizontal lines
+    for (var i=h; i>=0; i-=axes.scale) {
+        ctx.moveTo(0,i); ctx.lineTo(w,i); 
+    }
+    
     ctx.stroke();
 }
 
