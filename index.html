@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="css/index.css">
+<script src="js/index.js"></script>
 <html>
     
     <head>
@@ -10,24 +11,26 @@
         <div class="input-form">
             <div>
                 <a> Initial money: </a> <br>
-                <input type="number" min="1">
+                <input type="number" min="1" id="init">
             </div>
             <br>
             <div>
                 <a> Money for investing per month: </a> <br>
-                <input type="number" min="1">
+                <input type="number" min="1" id="add">
             </div>
             <br>
             <div>
                 <a> Estimated interest rate per month (%): </a> <br>
-                <input type="number" min="1">
+                <input type="number" min="1" id="inr">
             </div>
             <br>
             <div>
                 <a> Number of year: </a> <br>
-                <input type="number" min="1">
+                <input type="number" min="1" id="year">
             </div>
             <br>
+            <button id="calculate" onclick="draw()"> Calculate</button>
         </div>
+        <canvas id="canvas" width="500" height="500"></canvas>
     </body>
 </html>
