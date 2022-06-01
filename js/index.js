@@ -2,6 +2,7 @@ var API_KEY = "GIV5PQPE125MS0X1"
 
 // API command: https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=AAPL&interval=5min&apikey=GIV5PQPE125MS0X1
 
+
 function fn_invest(x) {
     var init = parseInt(document.getElementById("init").value); 
     var add = parseInt(document.getElementById("add").value); 
@@ -80,6 +81,8 @@ function draw() {
     document.getElementById("to_mon").innerHTML = "$" + Math.floor(val_total[year]); 
     document.getElementById("to_inv").innerHTML = "$" + Math.floor(fn_invest(year));
     document.getElementById("profit").innerHTML = "$" + Math.floor(val_total[year] - fn_invest(year));
+    
+    loadData();
 }
 
 function showAxes(ctx,axes) {
@@ -166,8 +169,77 @@ function fnGraph (ctx,axes,func,color,thick) {
     ctx.stroke();
 }
 
+
 function hello() {
     alert("Hello");
 }
 
 // -------------------------- STOCK ---------------------------
+
+var stockList = []; 
+var beg = 0;
+function loadData() { // Load all companies' symbol in NASDAQ
+    fetch("https://raw.githubusercontent.com/alexeipc/Finance/main/stockList.json")
+        .then(response => response.json())
+        .then(data => {
+            stockList = data;
+        })
+}
+
+
+function most_profit_in_day() {
+    for (var i=0; i<1; ++i) {
+        var symbol = stockList[i];
+        
+        var cmd = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+symbol+"&interval=1day&apikey="+API_KEY;
+        
+        console.log(cmd);
+        
+        fetch(cmd)
+                .then(response => response.json())
+                .then(data => {
+                    var p = data["Time Series (Daily)"];
+                    console.log(p);
+            })
+    }
+}
+
+function loadInitTable() {
+    beg = 0;
+    
+    if (document.getElementById("time_length").value == "day") {
+        most_profit_in_day();
+    }
+    
+    loadTable(0);
+}
+
+function nextTable() {
+    beg += 10;
+    
+    if (beg>=stockList.length) beg -= 10;
+    loadTable(beg);
+}
+function prevTable() {
+    beg -= 10;
+    if (beg < 0) beg = 0;
+    loadTable(beg);
+}
+
+function loadTable(beg) {
+    
+    var table = document.getElementById('myTable')
+    
+    table.innerHTML="";
+    
+    for (var i=beg; i<Math.min(beg+10,stockList.length); ++i) {
+        var row = `<tr> 
+                        <td>${stockList[i]}</td>
+                        <td>Joe</td>
+                        <td>$0</td>
+                        <td>0%</td>
+                    </tr>`
+        //console.log(stockList[i]);
+        table.innerHTML += row;
+    }
+}

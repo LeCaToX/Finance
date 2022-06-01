@@ -20,3 +20,10 @@
 .tradingview-widget-container {
     float: left;
 }
+
+th {
+    background-color: white;
+    color: black;
+    border-bottom: solid;
+    border-bottom-color: black;
+}

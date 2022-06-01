@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="css/index.css">
 <script  type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-  <script src="https://unpkg.com/lightweight-charts@3.8.0/dist/lightweight-charts.standalone.production.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 <html>
     
     <head>
@@ -73,12 +74,30 @@
         <!-- TradingView Widget END -->
             <div >
                 <a style="margin-left: 5vh; font-size: 3vh"> Most profitable stocks last </a>
-                <select name="cars" id="cars" form="carform" style="font-size: 2vh">
+                <select id="time_length" style="font-size: 2vh" onchange="loadInitTable()">
+                    <option value="null">---</option>
                     <option value="day">day</option>
                     <option value="week">week</option>
                     <option value="month">month</option>
                     <option value="year">year</option>
                 </select>
+                
+                <br>
+                <button onclick="prevTable()">Prev</button>
+                <button onclick="nextTable()">Next</button>
+                
+                <table class="table table-striped" style="width: 50%">
+                    <tr  class="bg-info">
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Growth</th>
+                    </tr>
+
+                    <tbody id="myTable">
+                        
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
