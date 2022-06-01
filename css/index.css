@@ -1,8 +1,22 @@
+.heading {
+    font-size: 5vh;
+     text-align: center;
+}
+.compound-interest {
+    border: solid;
+    border-color: darkgreen;
+}
 .input-form {
     border: solid;
     border-color: darkslateblue;
     margin: 5vh;
     padding: 3vh;
     width: 30vh;
+
     border-radius: 10px;
+    display: inline-block;
+    float: left;
+}
+.tradingview-widget-container {
+    float: left;
 }
