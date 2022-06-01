@@ -1,3 +1,7 @@
+var API_KEY = "GIV5PQPE125MS0X1"
+
+// API command: https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=AAPL&interval=5min&apikey=GIV5PQPE125MS0X1
+
 function fn_invest(x) {
     var init = parseInt(document.getElementById("init").value); 
     var add = parseInt(document.getElementById("add").value); 
@@ -48,6 +52,8 @@ function CalUnit(year) {
 }
 
 function draw() {
+    console.log(API_KEY);
+    
     var year = parseInt(document.getElementById("year").value); 
     init_val_total(year);
     
@@ -141,6 +147,7 @@ function showAxes(ctx,axes) {
 function fnGraph (ctx,axes,func,color,thick) {
     var xx, yy, dx=4, x0=axes.x0, y0=axes.y0;
     
+    
     ctx.beginPath();
     ctx.lineWidth = thick;
     ctx.strokeStyle = color;
@@ -156,12 +163,11 @@ function fnGraph (ctx,axes,func,color,thick) {
         else ctx.lineTo(xx,yy);
     }
     
-    
     ctx.stroke();
 }
 
 function hello() {
-    alert("Hello")
+    alert("Hello");
 }
 
 // -------------------------- STOCK ---------------------------

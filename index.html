@@ -38,7 +38,7 @@
             <div style="display: inline-block; margin: 5vh">
                 <canvas id="canvas" width="800" height="500" ></canvas>
             </div>
-            <div style="display: inline-block; font-size: 3vh">
+            <div style="display: inline-block; font-size: 2vh">
                 <a> Estimated profit: </a> <b><a id="profit" style="color: green"></a> </b><br>
                 <a> Total invested money: </a> <b> <a id="to_inv"></a> </b> <br>
                 <a> Total money: </a> <b> <a id="to_mon" style="color: cadetblue"></a> </b>
@@ -47,6 +47,7 @@
         
         
         <!-- TradingView Widget BEGIN -->
+        <div>
         <div class="heading"> Stocks Views </div>
         <div class="tradingview-widget-container">
             <div id="tradingview_f41f8"></div>
@@ -70,5 +71,15 @@
         </script>
             </div>
         <!-- TradingView Widget END -->
+            <div >
+                <a style="margin-left: 5vh; font-size: 3vh"> Most profitable stocks last </a>
+                <select name="cars" id="cars" form="carform" style="font-size: 2vh">
+                    <option value="day">day</option>
+                    <option value="week">week</option>
+                    <option value="month">month</option>
+                    <option value="year">year</option>
+                </select>
+            </div>
+        </div>
     </body>
 </html>
