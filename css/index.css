@@ -17,3 +17,6 @@
     display: inline-block;
     float: left;
 }
+.tradingview-widget-container {
+    float: left;
+}

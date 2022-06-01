@@ -63,7 +63,7 @@ function draw() {
     
     var pp = CalUnit(year);
     
-    axes.scaleY = Math.floor((canvas.height-70)/pp.scaleY);
+    axes.scaleY = Math.floor((canvas.height-120)/pp.scaleY);
     unitY = pp.unitY;
     axes.doNegativeX = true;
 
@@ -84,7 +84,7 @@ function showAxes(ctx,axes) {
     
     ctx.strokeStyle =  "rgb(0,0,0)"; 
     ctx.moveTo(60,h-30); ctx.lineTo(w,h-30);  // X axis
-    ctx.moveTo(60,h-30);    ctx.lineTo(60,0);  // Y axis
+    ctx.moveTo(60,h-30);    ctx.lineTo(60,20);  // Y axis
     
     ctx.stroke();
     
@@ -100,7 +100,7 @@ function showAxes(ctx,axes) {
     var curYear = new Date().getFullYear();
     
     for (var i=0; i<w-60; i+=axes.scaleX) {
-        ctx.moveTo(i+60,h-30); ctx.lineTo(i+60,0); 
+        ctx.moveTo(i+60,h-30); ctx.lineTo(i+60,20); 
         ctx.fillText(curYear.toString(), i+50, h-20);
         curYear++;
     }
@@ -108,11 +108,29 @@ function showAxes(ctx,axes) {
     // Horizontal lines
     var year = parseInt(document.getElementById("year").value);
     //unitY = CalUnit(year);
+    
+    var ss="dolar", t = 1;
+    
+    if (unitY >= 1000000000) {
+        ss = "billion dollar";
+        t = 1000000000;
+    }
+    else if (unitY >= 1000000) {
+        ss = "million dollar";
+        t = 1000000;
+    }
+    else if (unitY >= 1000) {
+        ss = "thousand dollar";
+        t = 1000;
+    }
+    
+    ctx.fillText(ss,10,10);
+    
     var curAmount = 0;
-    for (var i=h; i>0; i-=axes.scaleY) {
+    for (var i=h; i>20; i-=axes.scaleY) {
         ctx.moveTo(60,i-30); ctx.lineTo(w,i-30); 
         //ctx.moveTo(60,i-20);
-        ctx.fillText(curAmount.toString(),30,i-30);
+        ctx.fillText((curAmount/t).toString(),30,i-30);
         
         curAmount += unitY;
     }
