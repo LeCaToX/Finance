@@ -178,8 +178,9 @@ function hello() {
 
 var stockList = []; 
 var beg = 0;
+var tableStock = [];
 function loadData() { // Load all companies' symbol in NASDAQ
-    fetch("https://raw.githubusercontent.com/alexeipc/Finance/main/stockList.json")
+    fetch("https://raw.githubusercontent.com/alexeipc/Finance/main/js/stockList.json")
         .then(response => response.json())
         .then(data => {
             stockList = data;
@@ -188,20 +189,34 @@ function loadData() { // Load all companies' symbol in NASDAQ
 
 
 function most_profit_in_day() {
-    for (var i=0; i<1; ++i) {
+    for (var i=0; i<stockList.length; ++i) {
         var symbol = stockList[i];
+        
+        var tmp = {};
         
         var cmd = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+symbol+"&interval=1day&apikey="+API_KEY;
         
-        console.log(cmd);
+        //console.log(cmd);
+        tmp.symbol = symbol;
         
         fetch(cmd)
                 .then(response => response.json())
                 .then(data => {
-                    var p = data["Time Series (Daily)"];
-                    console.log(p);
+                    var date = data["Time Series (Daily)"];
+                    for (var d in date) {
+                        var growth = 0;
+                        var value = date[d];
+                        
+                        var growth = (value["4. close"] - value["1. open"]) / value["1. open"];
+                        
+                        tmp.growth = growth * 100;
+                        
+                        break;
+                    }
             })
+        tableStock[i] = tmp;
     }
+    console.log(tableStock);
 }
 
 function loadInitTable() {
