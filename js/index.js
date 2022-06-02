@@ -187,38 +187,49 @@ function loadData() { // Load all companies' symbol in NASDAQ
         })
 }
 
-function calculate_growth_daily(symbol) {
+async function calculate_growth_daily(symbol,idx) {
+    var dat;
     var cmd = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+symbol+"&interval=1day&apikey="+API_KEY;
         fetch(cmd)
                 .then(response => response.json())
                 .then(data => {
                     var date = data["Time Series (Daily)"];
                     for (var d in date) {
-                        var growth = 0;
                         var value = date[d];
                         
                         var growth = (value["4. close"] - value["1. open"]) / value["1. open"];
-                        console.log(growth)
+                        
+                        tableStock[idx].growth = growth*100;
+                        tableStock[idx].symbol = symbol;
+                        
+                        //console.log(growth)
                         
                         return(growth * 100);
                         //console.log("HELLO");
                         
                         break;
                     }
+                /*
+                    dat = data["Time Series (Daily)"];
+                    tableStock[idx] = dat;
+                    tableStock[idx].symbol = symbol;
+                    console.log(dat);
+                    */
+            
             })
+    return dat;
 }
 
 function most_profit_in_day() {
-    for (var i=0; i<3; ++i) {
+    for (var i=0; i<50; ++i) {
         var symbol = stockList[i];
         
         var tmp = {};
         
-        //console.log(cmd);
-        tmp.symbol = symbol;
-        tmp.growth = calculate_growth_daily(symbol);
+        tableStock[i] = {};
         
-        tableStock[i] = tmp;
+        //console.log(cmd);
+        calculate_growth_daily(symbol,i);
     }
     console.log(tableStock);
 }
